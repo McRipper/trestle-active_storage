@@ -1,7 +1,12 @@
 module Trestle
   module ActiveStorage
     class Engine < Rails::Engine
-      config.assets.precompile << 'activestorage.js' << 'trestle/active_storage_fields.js'
+      # Propshaft serves engine assets directly; only Sprockets needs precompile entries.
+      initializer 'trestle.active_storage.assets' do
+        if defined?(Sprockets)
+          config.assets.precompile << 'activestorage.js' << 'trestle/active_storage_fields.js'
+        end
+      end
 
       config.to_prepare do
         Trestle::ResourceController.send(:include, Trestle::ActiveStorage::ControllerConcern)

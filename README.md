@@ -35,6 +35,8 @@ gem 'trestle-active_storage'
 
 Run `bundle install`, and then restart your Rails server.
 
+For Rails 8, use Ruby 3.2+ and Trestle 0.10.x. Both Propshaft (Rails 8 default) and Sprockets asset pipelines are supported.
+
 ### Active Storage previews
 
 This plugin shows previews of uploaded files if your system meets the requirements. For more information please [consult the Ruby on Rails guides](https://edgeguides.rubyonrails.org/active_storage_overview.html#previewing-files).
