@@ -5,10 +5,10 @@
         <% attachments.each do |attachment| %>
           <div class="active-storage__preview">
             <% if attachment.previewable? %>
-              <%= link_to image_tag(main_app.url_for(attachment.preview(resize_to_fill: [300, 300])), class: "active-storage__image"),
+              <%= link_to image_tag(main_app.url_for(attachment.preview(resize_to_limit: [300, 300])), class: "active-storage__image"),
                           main_app.rails_blob_path(attachment, disposition: "attachment") %>
             <% elsif attachment.variable? %>
-              <%= link_to image_tag(main_app.url_for(attachment.variant(resize_to_fill: [300, 300])), class: "active-storage__image"),
+              <%= link_to image_tag(main_app.url_for(attachment.variant(resize_to_limit: [300, 300])), class: "active-storage__image"),
                           main_app.rails_blob_path(attachment, disposition: "attachment") %>
             <% elsif attachment.persisted? %>
               <%= link_to main_app.rails_blob_path(attachment, disposition: "attachment"), class: "btn btn-info" do %>
@@ -20,12 +20,16 @@
             <% end %>
             <div>
               <small><%= attachment.blob.filename %></small>
-              <%= builder.check_box("delete_#{field_name}_#{attachment.blob_id}", label: "Delete this #{field_name.to_s.singularize}") %>
+              <%= builder.check_box("delete_#{field_name}_#{attachment.blob_id.to_s.delete('-')}", label: "Delete this #{field_name.to_s.singularize}") %>
             </div>
           </div>
           <hr>
         <% end %>
       <% end %>
+    </div>
+
+    <div class="progress" style="display: none">
+      <div class="progress-bar progress-bar-striped active"></div>
     </div>
 
     <%= builder.raw_file_field(field_name, class: 'active-storage__field', multiple: true, direct_upload: true) %>

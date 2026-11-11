@@ -6,3 +6,6 @@ test/dummy/db/*.sqlite3-journal
 test/dummy/log/*.log
 test/dummy/tmp/
 trestle-active_storage*.gem
+
+/Gemfile.lock
+/test/dummy/public/assets/
